@@ -12,8 +12,7 @@ const create = async (req, res) => {
     const v = new Validator(req.body, {
         name: "required",
 		email:"required",
-        phone:"required",
-        gender:"required"
+        phone:"required"
     });
     let matched = await v.check().then((val) => val);
     if (!matched) {
