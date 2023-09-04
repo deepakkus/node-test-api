@@ -6,13 +6,29 @@ var passwordHash = require('password-hash');
 
 const AdminSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  fullname: {
+  name: {
     type: String,
     required: false,
   },
   email: {
     type: String,
     unique: true,
+    required: false,
+  },
+  phone: {
+    type: String,
+    required: false,
+  },
+  about: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  state: {
+    type: String,
     required: false,
   },
   password: {

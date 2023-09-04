@@ -9,20 +9,14 @@ const { DBerror } = require('../../service/errorHaldel');
 function createToken(data) {
     return jwt.sign(data, 'DonateSmile');
 }
-/*
 
-{
-    "email":"samita1@gmail.com",
-    "password":"samita123",
-    "fullname":"samita"
-}
-*/
 const register = async (req, res) => {
 
     const v = new Validator(req.body, {
         email: 'required',
         password: 'required|minLength:4',
-        fullname: 'required',
+        name: 'required',
+        phone: 'required'
     });
     let matched = await v.check().then((val) => val);
     if (!matched) {
@@ -33,7 +27,12 @@ const register = async (req, res) => {
         _id: mongoose.Types.ObjectId(),
         email: req.body.email,
         password: passwordHash.generate(req.body.password),
-        fullname: req.body.fullname,
+        name: req.body.name,
+        phone: req.body.phone,
+        gender: req.body.gender,
+        about: req.body.about,
+        city: req.body.city,
+        state: req.body.state,
         token: createToken(req.body),
     };
 
@@ -62,12 +61,7 @@ const register = async (req, res) => {
             });
         });
 }
-/*
-{
-    "email":"samita@kusmail.com",
-    "password":"samita123"
-}
-*/
+
 const login = async (req, res) => {
     const v = new Validator(req.body, {
         email: 'required',
